@@ -53,18 +53,33 @@ power electronics ->25ms
 -> Responsible for charging
 -> Interface over -> CAN
 ------------------------------------------------
+It seems like you're describing two key components of the charging system for electric vehicles:
+the Charging Controller/Charging Control Unit (CC/CCU) and the Vehicle Interface Control Module (VICM)
+
+1. **Charging Controller/Charging Control Unit (CC/CCU)**:
+   - It's an infotainment Electronic Control Unit (ECU) dedicated to handling charging functions within the vehicle.
+   - Responsibilities include signaling, power control, managing charging economy, and performing handshakes with the charging infrastructure.
+   - Implemented based on Classic AUTOSAR standards with support for DIN70121/ISO15118 protocols, typically relying on a Runtime Environment (RTE).
+   - Later, these functionalities may be consolidated and managed by the Vehicle Interface Control Module (VICM).
+
+2. **Vehicle Interface Control Module (VICM)**:
+   - Responsible for charging control, especially safety-critical aspects related to power electronics, with a response time of around 25 milliseconds.
+   - Manages the interface over the Controller Area Network (CAN), a standard communication protocol used in vehicles.
+
+It seems like the CC/CCU initially handles the charging functionalities within the vehicle, but later, these responsibilities are transferred to the VICM. The VICM takes over the charging control and interfaces with the charging infrastructure through the CAN bus. This separation of duties ensures efficient and safe charging operations for electric vehicles.
 
 
-
-CGM: Gateway module
+CGM: Charging Gateway module
 -------------------------------------------------
 -> All various communication mediums intersects
 i.e CAN, Ethernet
 1. VICM <=====> CGM: Over CAN
 2. VCU <=====> CGM: Over Ethernet
 
+It acts as an central hub between CAN and Ethernet
 
 
+Charging controller unit
 CCU is devided into two parts
 -------------------------------------------------
 1. PLCM -> CAN to Eth
@@ -99,3 +114,4 @@ CAN signals -> VCU -> VHAL
 PLCM : Pass through modem
 -------------------------------------------------
 -> It is a bridge converts from CAN to Ethernet
+-> Involved in the commucation between the vehicle interface control module and the charging gatway module
