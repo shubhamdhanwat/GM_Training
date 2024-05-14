@@ -1,0 +1,89 @@
+adb commands
+--------------------------------------------------------------------------------------------------
+Generic Commands:
+--------------------------------------------------------------------------------------------------
+1. adb connect 192.168.222.108
+2. adb root 		    //to give root access. allow to adb pull/push
+3. adb remount 	        // put system partition in readable mode. use before pushing file on system
+4. adb shell 		    // give shell acess
+
+5. adb push <file location on Local PC> <file location on hw> 	// push file from pc to hw
+6. adb pull <file location on hw> <file location on Local PC> 	// pull file from hw to pc
+
+7. adb logcat | tee <filename> 	// will capture the logs in the file and print it on terminal
+8. logcat >> <filename> 		// To capture logs from adb shell
+--------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------
+Project Specific Commands:
+--------------------------------------------------------------------------------------------------
+1. v2g_service
+HW Path: /vendor/bin/
+push file on hw: adb push < file location on local PC >/v2g_service /vendor/bin
+
+2. v2g_gateway.conf
+HW Path: /vendor/etc/
+push file on hw: adb push < file location on local PC >/v2g_gateway.conf /vendor/etc
+
+3. libkivicore.so
+HW Path: /vendor/lib64/
+push file on hw: adb push < file location on local PC >/libkivicore.so /vendor/lib64
+
+4. libgm_din_stack.so(libv2g_din70121.so)
+HW Path: /vendor/lib64/
+push file on hw: adb push < file location on local PC >/libgm_din_stack.so /vendor/lib64
+
+5. To check the service status
+ps -ef | grep v2g_service
+ps: This is the primary command. It's short for "process status".
+-e: Selects all processes.
+-f: Produces a full-format listing.
+A list of processes where the name or command contains "v2g_service".
+--------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------
+Commands to start the service through init.rc
+--------------------------------------------------------------------------------------------------
+cd /vendor/etc/init                            //Change the current directory to vender/etc/init.
+
+setprop persist.product.flexchargeDin true     //sets the system property mentoined to true .
+                                               //It is used to control behaviour related to flexible charging.
+
+getprop | grep flexcharge                       // gives all sys properties and filter those containig "flexcharge"
+
+getprop init.svc.ethcfg
+
+ps -A | grep v2g                                //display process contaning v2g
+
+dmesg | grep v2g                                //display messages produced by kernel and filter then containig v2g
+--------------------------------------------------------------------------------------------------
+
+properties to be set---
+-----------------------------------------------------------------------------
+setprop persist.product.flexchargeDin true
+
+setprop persist.sys.gm.sdv_enable false
+
+setprop persist.log.tag.GMVHAL V
+
+setprop init.svc.vendor.ethcfg stopped
+
+--------------------------------------------------------------------------------------------
+for checking tombstones------------>>>>>>>>
+in adb console----
+check tombstones in data directory
+---------------------------------------------
+Tombstones in Android refer to files created by system when an application crashes.
+These files are useful for diagnosing the cause of the crash.
+
+-----------------------------------------------
+abd shell
+
+cd data/tombstones
+
+ls
+--------------------------------------------------------------------------------------------
+For CPU utilization->
+in adb console----
+in one terminal -> top
+in another terminal -> top -H -p pid -d 1 (pid- process Id)

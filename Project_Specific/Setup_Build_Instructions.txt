@@ -1,0 +1,97 @@
+Repositories:
+
+1) CMake
+mkdir -p $HOME/kivi
+cd $HOME/kivi
+git clone git@kivigit.kpit.com:cmake.git
+cd cmake
+git checkout konfluence_dev
+
+
+2) Scripts
+mkdir -p $HOME/kivi
+cd $HOME/kivi
+git clone git@kivigit.kpit.com:kxtools.git scripts
+cd scripts
+git checkout master
+
+3) Setup environment
+source ~/kivi/scripts/setenvx86_64.sh
+
+4) Google test
+mkdir -p $HOME/kivi/tools
+cd $HOME/kivi/tools
+unzip gtest.zip
+cd gtest
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX:PATH=$SYSROOT -DCMAKE_BUILD_TYPE=RELEASE ..
+make -j 32
+cp libgtest*.a $SYSROOT/usr/lib
+cp -varf ../include/gtest $SYSROOT/usr/include
+
+
+
+5) Kivicore
+mkdir -p $HOME/kivi/src
+cd $HOME/kivi/src
+git clone git@kivigit.kpit.com:kivicore.git
+cd kivicore
+git checkout flexcharge
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX:PATH=$SYSROOT -DCMAKE_BUILD_TYPE=DEBUG ..
+make && make install
+
+6) DIN Stack
+mkdir -p $HOME/gm/flexcharge/src
+cd $HOME/gm/flexcharge/src
+git clone https://gitlab.kpit.com/gm_flexcharge/com.kpit.ccs.git
+cd com.kpit.ccs
+git checkout Development
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX:PATH=$SYSROOT -DX86HOST=1 -DCMAKE_BUILD_TYPE=DEBUG ..
+(cmake -DCMAKE_INSTALL_PREFIX:PATH=$SYSROOT -DX86HOST=1 -DCMAKE_BUILD_TYPE=DEBUG ../Software)
+make && make install
+
+7) Flexcharge Service
+mkdir -p $HOME/gm/flexcharge/src
+cd $HOME/gm/flexcharge/src
+git clone https://gitlab.kpit.com/gm_flexcharge/com.gm.flexcharge.git
+cd com.gm.flexcharges
+git checkout sriramg_dev
+mkdir build
+cd build
+cmake -DCMAKE_MODULE_PATH=~/kivi/cmake/modules -DCMAKE_INSTALL_PREFIX:PATH=$SYSROOT -DCMAKE_BUILD_TYPE=DEBUG -DWITH_TESTS=ON ..
+make && make install
+
+------------------------------------------------------------------------
+To Build the code
+-----------------------------------------------------------------------
+source ~/kivi/scripts/setenvx86_64.sh
+cd $(HOME)/$(WORK)/com.gm.flexcharge/build 
+make clean
+cmake -DCMAKE_MODULE_PATH=~/kivi/cmake/modules -DCMAKE_INSTALL_PREFIX:PATH=$SYSROOT -DCMAKE_BUILD_TYPE=DEBUG -DWITH_TESTS=ON ..
+make && make install
+
+make cover 
+	* build test and generate coverage files
+./flexcharge_tests
+	* Build test 
+	* steps_1: cd $(HOME)/$(WORK)/com.gm.flexcharge/build/tests
+	* steps_2: ./flexcharge_tests
+
+------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+
+copied v2g_gateway.conf file to /etc/. from /home/kpit/147142/WORK/GM_FLEX_140322/com.gm.flexcharge/cfg/
+
+cp $(WORK)/GM_FLEX_140322/com.gm.flexcharge/cfg/v2g_gateway.conf /etc/.
+
+------------------------------------------------------------------------
+
+
+

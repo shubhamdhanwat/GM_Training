@@ -1,0 +1,21 @@
+cmake - Cross-Platform Makefile Generator.
+
+mkdir build  # Create a build directory
+cd build     # Enter the build directory
+cmake file_names ..     # Generate build files
+cmake --build .  # Build the project
+
+
+./my_executable
+
+make && make install 
+is a concise way to compile source code into executable programs or libraries and then install them on your system in one go
+
+Cmake: Cmake is a cross platform build system generator. It's used to generate build files
+
+make : make is a build automation tool that executes commands defiendmin the make files to build and manage software projects.
+
+
+calibration refers to the process of fine-tuning or adjusting various parameters 
+and settings in a vehicle's electronic control systems to optimize performance, 
+ensure compliance with regulatory standards, and improve overall efficiency. 

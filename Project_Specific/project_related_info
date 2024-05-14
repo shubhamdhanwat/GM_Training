@@ -1,0 +1,101 @@
+Project: Flex charging comm stack
+Team: Gateway developement (Connected vehicle)
+Reporting to: prajakta khade -> Minal Hajare
+Role: C++ developer
+
+
+DTC -> Diagnostic Trouble Code(Identify issue in the vechicle system.)
+V2G -> Vehicle to Grid(Bidirectional engergy flow between electric flow and grid)
+EVSE-> Charging station / Electric vehicle supply unit
+CCU -> Charging controller unit
+CGM -> Gateway module in Vehicle
+CSM -> Centre stack module
+PLCM -> Pass through modem(a device used for communication between different newtwork protocols or system.)
+VCU -> Vehicle communication unit (V2G)
+CCS -> Charging control stack(CDD -> RTE -> BIONIC(SOCKET API))
+PLC -> Powerline Communication
+
+
+Charging Controller: This ECU (Electronic Control Unit) manages the core charging functionality.
+It processes signals from the charging station (EVSE) to initiate and control the charging process for
+ the high-voltage (HV) battery in the vehicle. It also handles contactor controls to switch between AC and 
+ DC charging modes. Additionally, it deals with analog interfaces from the charging station to handle wakeup signals 
+ and disable powerline communication within the vehicle.
+
+ Charging Communication Controller:
+ This ECU handles communication protocols with the charging station according to standards like DIN 70121/ISO15118-20.
+ It's responsible for coordinating the transmission and reception of control commands between the charging controller 
+ and the EVSE, facilitating secure transfer of certificates required for charging communication.
+  It also executes SmartCharging applications to adjust charge schedules and parameters as needed.
+
+
+Charging Communication Bridge: This ECU focuses on implementing the physical and data link layers for powerline communication 
+between the EVSE and the vehicle. It manages communication handshakes and data bridging functionality 
+to transfer Ethernet frames received from the EVSE to the Charging Communication Controller via 
+the in-vehicle Ethernet communication link.
+
+
+CC/CCU: Charging controller
+-------------------------------------------------
+-> It is infotainment ECU
+-> ECU inside vehicle, dedicated for charging fucntio
+-> Signalling, power control, economy, Handshakes
+->ECU based on Classic autosar with implementation of DIN70121/ISO15118 -> relying on RTE
+->later this all CCU work is done by VICM
+--------------------------------------------------
+
+
+
+VICM:
+-------------------------------------------------
+-> Charging control -> safety related
+power electronics ->25ms
+-> Responsible for charging
+-> Interface over -> CAN
+------------------------------------------------
+
+
+
+CGM: Gateway module
+-------------------------------------------------
+-> All various communication mediums intersects
+i.e CAN, Ethernet
+1. VICM <=====> CGM: Over CAN
+2. VCU <=====> CGM: Over Ethernet
+
+
+
+CCU is devided into two parts
+-------------------------------------------------
+1. PLCM -> CAN to Eth
+2. VCU -> Infotainment ECU -> porting DIN70121/ISO15118 into Android
+
+
+
+VCU/CSM -> Vehicle communication unit/ Centre stack module
+-------------------------------------------------
+-> VCU is android platform
+-> All functionality of CCU need to port it into android
+
+
+
+-> Get it up and running on VCU
+-> integration-> Bootup, state machine, lifecycle mngt, Persistancy, Dignostics, Handshakes, testing and VV
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Important section in requirements
+-------------------------------------------------
+4.1.1: Charging Communication Gateway Internal Fault Status
+4.1.2: Charging Communication Operational Status
+4.2.2.3: Functional Signal Status Flag Processing
+4.2.2.4: Signal Supervision Handling
+4.2.2.5: Error & Failure Handling-------------------------------------------------
+VICM -> IPV4, PLCM/EVSE -> IPV6
+CAN signals -> VCU -> VHAL
+
+
+PLCM : Pass through modem
+-------------------------------------------------
+-> It is a bridge converts from CAN to Ethernet

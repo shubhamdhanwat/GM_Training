@@ -1,0 +1,14 @@
+Unit testing
+unit testing is a type of software testing that focuses on inidvidual unit  or components of software system.
+The purpose of it is to validate that each unit of sofware works as intended or meets the requirement.
+Unit Testing are designed to validate the smallest possible unit of code, such as function or a method.
+It is carried out during the development of the application.
+
+Types of Unit Testing
+1.Manual 
+2.Automation
+
+Unit Testing Techniques
+1.Black Box Testing:This testing includes the unit test for input, user interface and output parts
+2.White Box Testing: This techniques is used for testing the functional behavior of the system  by giving the input and checking the output.
+3.Gray Box Testing: This 

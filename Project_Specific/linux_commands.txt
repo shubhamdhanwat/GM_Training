@@ -1,0 +1,44 @@
+#ls                     ->Display the files and directory in the current directory
+#pwd                    ->Prints the current working directory
+#mkdir  new_directory   ->Creates a new directory on terminal
+#cd  directory_name     ->Change the current directory
+#rmdir directory_name   ->Remove directory
+--------------------------------------------
+#cp source_file  destination_file  ->Copies files or directory from one location to another
+example :
+commmand : #ls
+first.txt
+command : #cp first.txt second.txt
+command : #ls
+first.txt second.txt
+the files of first.txt are copied to second.txt
+-----------------------------------
+#mv old_file new_file -> moves command is used to rename file or directory
+example:
+command : #ls
+first.txt main.cpp
+command : #mv first.txt renamed.cpp
+command : #ls
+main.cpp renamed.cpp
+-----------------------------------------
+#rm file_name                   -> deletes the file or directory
+#touch new_file.txt             -> creates a new file
+#cat file_name.txt              -> Displays the content in the file
+#less file_name.txt             -> Displays the content of the file one page at a time
+#head file_name.txt         -> Displays the first few lines of the file
+#tail file_name.txt         -> Displays the last few lines of the file
+---------------------------------------
+#grep pattern file_name.txt -> searches for a pattern in files
+grep(Global Regular Expression Print)
+----------------------------------------
+#chmod permission file_name.txt  -> Change mode / changes the permission of a file or directory
+#man command_name               -> displays the manual page for a command_name. It contains all the information about the conmand
+#locate                         ->  find a file in the database
+#ps                             ->displays the processes in the terminal
+#echo                           -> Displays the active processes on the terminal
+#df -h                          -> details of the file system
+#wc                             -> checks the lines, wordcount and characters in a file .
+#wc -w                          -> shows number of words
+#wc -l                          -> shows number of lines
+#wc -m                          -> shows the number of character present in a file
+#wget                           -> it is used to download files from the internet .

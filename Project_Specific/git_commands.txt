@@ -1,0 +1,12 @@
+#git init                   -> initializes a new git respository in the current directory
+git clone respository_url   -> clones a respository from a remote server to your local machine
+git add files               -> add the files to the staging area
+git add .                   -> adds all the files to the staging area
+git commit -m "message "    -> commits the changes in the staging area with the descriptive message
+git status                  -> shows the status of files in the working directory and staging area
+git pull origin master      -> fetches changes from a remote repository and merges them into the current brach.
+git push origin master      -> pushes committed changes from the local repository to a remote repository
+git branch                  -> lists all branches in the repository.
+git checkout  branch_name   -> switches to the specific branch
+git merge                   -> merges changes from the specific branch to current branch
+git log                     -> displays a log of commits

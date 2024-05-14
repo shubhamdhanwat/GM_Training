@@ -1,0 +1,29 @@
+Adb ---Android Debug Bridge
+-ADB is a command-line tool that lets you communicate with an Android device connected to your computer.
+-It's often used for debugging, installing apps, and other development tasks.
+
+adb commands
+--------------------------------------------------------------------------------------------------
+Generic Commands:
+--------------------------------------------------------------------------------------------------
+1. adb connect 192.168.222.108// Ip address of the vcu(Vehicle communication unit)
+
+2. adb root 		
+-To give root access. allow to adb pull/push
+-It restart the andriod device in the root mode which give us root access.   
+
+3. adb remount 	
+-put system partition in readable mode. use before pushing file on system
+-To remount the system partition of an Android device with read-write permissions.
+-By default, the system partition is mounted as read-only.
+
+4. adb shell 		// give shell acess
+-to access the shell (command-line interface) of an Android-based automotive system. 
+
+5. adb push <file location on Local PC> <file location on hw> 	// push file from pc to hw
+
+6. adb pull <file location on hw> <file location on Local PC> 	// pull file from hw to pc
+
+7. adb logcat | tee <filename> 	// will capture the logs in the file and print it on terminal
+
+8. logcat >> <filename> 		// To capture logs from adb shell
