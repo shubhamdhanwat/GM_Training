@@ -1,0 +1,5 @@
+add_test( TestingCode.IsEvenTest /home/kpit/GM_Training/Project_Specific/build/G_Test [==[--gtest_filter=TestingCode.IsEvenTest]==] --gtest_also_run_disabled_tests)
+set_tests_properties( TestingCode.IsEvenTest PROPERTIES WORKING_DIRECTORY /home/kpit/GM_Training/Project_Specific/build)
+add_test( TestingCode.IsEqual /home/kpit/GM_Training/Project_Specific/build/G_Test [==[--gtest_filter=TestingCode.IsEqual]==] --gtest_also_run_disabled_tests)
+set_tests_properties( TestingCode.IsEqual PROPERTIES WORKING_DIRECTORY /home/kpit/GM_Training/Project_Specific/build)
+set( G_Test_TESTS TestingCode.IsEvenTest TestingCode.IsEqual)

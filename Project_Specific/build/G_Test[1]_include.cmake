@@ -1,0 +1,5 @@
+if(EXISTS "/home/kpit/GM_Training/Project_Specific/build/G_Test[1]_tests.cmake")
+  include("/home/kpit/GM_Training/Project_Specific/build/G_Test[1]_tests.cmake")
+else()
+  add_test(G_Test_NOT_BUILT G_Test_NOT_BUILT)
+endif()
