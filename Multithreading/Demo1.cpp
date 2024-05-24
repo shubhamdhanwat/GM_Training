@@ -34,20 +34,20 @@ int main()
 
     std::thread t1(&square,std::ref(data)   );
     std::thread t2(&cube,std::ref(data) );
-    // std::thread t3(
-    //     [](std::array<int, 5> &data){
-    //         int k = 10;
-    //         for (int val : data){
-    //             std::this_thread::sleep_for(std::chrono::seconds(1) );
-    //             result[k++] = val * val /val;
-    //         }
-    //     },
-    //     std::ref(data)
-    // );
+    std::thread t3(
+        [](std::array<int, 5> &data){
+            int k = 10;
+            for (int val : data){
+                std::this_thread::sleep_for(std::chrono::seconds(1) );
+                result[k++] = val * val /val;
+            }
+        },
+        std::ref(data)
+    );
 
     t1.join();//main should not proceed further untill this line  t1 sends a signal "that it is finished"
     t2.join();
-    // t3.join();
+    t3.join();
 
     //here the main thread is blocked 
 

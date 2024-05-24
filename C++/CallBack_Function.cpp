@@ -4,7 +4,8 @@
  and is intended to be called at a later time.
  
 */
-//  a function that takes a callback function as an argument
+
+//  a function that takes a callback function as an argument//function pointer
 void performOperation(int x, int y, void (*callback)(int)) {
     int result = x + y;
     // Call the callback function with the result

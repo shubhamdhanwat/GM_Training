@@ -1,0 +1,48 @@
+In C++, `std::shared_ptr` is a smart pointer that provides automatic memory management for dynamically allocated objects. It is designed to manage the ownership of dynamically allocated objects, preventing memory leaks and dangling pointers.
+
+Here's how `std::shared_ptr` works and how it differs from raw pointers:
+
+1. **Ownership Management**:
+    - With raw pointers, you're responsible for managing the memory allocated using `new` and `delete`. If you forget to `delete` the memory, you'll have a memory leak. If you `delete` it too early, you might end up with a dangling pointer.
+    - `std::shared_ptr` manages the ownership of the object it points to. It keeps track of how many `std::shared_ptr` instances point to the same object. The memory is deallocated automatically when the last `std::shared_ptr` pointing to the object is destroyed.
+
+2. **Reference Counting**:
+    - `std::shared_ptr` uses a reference counting mechanism. Each `std::shared_ptr` instance maintains a reference count, indicating how many `std::shared_ptr` instances point to the same object.
+    - When a `std::shared_ptr` is created, it starts with a reference count of 1. When a copy is made (via assignment or construction), the reference count increments. When a `std::shared_ptr` goes out of scope or is reset, the reference count decrements. If the reference count reaches zero, it means no `std::shared_ptr` is pointing to the object anymore, and the memory is deallocated.
+
+3. **Safety**:
+    - `std::shared_ptr` provides a safer alternative to raw pointers because it helps avoid common pitfalls such as memory leaks and dangling pointers. As long as you use `std::shared_ptr` consistently, you're less likely to encounter these issues.
+
+4. **Use Cases**:
+    - `std::shared_ptr` is useful when multiple parts of your code need to access the same dynamically allocated object and you want the object's lifetime to be managed automatically.
+    - It's commonly used in scenarios where you need shared ownership, meaning multiple entities need access to the same object and none of them should be responsible for deleting it.
+
+In your example, `std::shared_ptr<vehicle>` is being used to manage the ownership of a dynamically allocated `vehicle` object. When `ptr` goes out of scope or is reset, the `vehicle` object will be automatically deallocated when no other `std::shared_ptr` is pointing to it, thanks to the reference counting mechanism of `std::shared_ptr`. This ensures proper memory management without the need for manual intervention.
+
+A dynamically allocated object refers to an object whose memory is allocated at runtime from the heap, using operators like `new` in C++ or `malloc` in C. This is in contrast to objects that are created statically (on the stack) or as part of another object's memory (embedded objects).
+
+Here's what "dynamically allocated object" means in a bit more detail:
+
+1. **Allocation at Runtime**: When you dynamically allocate an object, you're requesting memory from the system's heap at runtime. This allows you to determine the size and lifetime of the object at runtime, as opposed to compile time.
+
+2. **Lifetime Management**: Since dynamically allocated objects don't have a predetermined lifetime like stack-allocated objects (which are destroyed when they go out of scope), you're responsible for managing their lifetime manually. This means you must explicitly deallocate the memory when you're done with the object to avoid memory leaks.
+
+3. **Pointer-Based Access**: Dynamically allocated objects are accessed through pointers. When you use `new` in C++ to create an object, it returns a pointer to the allocated memory where the object resides. You then use this pointer to access and manipulate the object.
+
+4. **Explicit Deallocation**: Unlike stack-allocated objects, which are automatically destroyed when they go out of scope, dynamically allocated objects persist until you explicitly deallocate their memory using the `delete` operator in C++ or `free` function in C.
+
+Here's an example in C++:
+
+```cpp
+// Dynamically allocating an object
+int* ptr = new int; // Allocates memory for an integer on the heap
+
+// Using the dynamically allocated object
+*ptr = 10;
+std::cout << *ptr << std::endl; // Outputs: 10
+
+// Deallocating the memory
+delete ptr; // Releases the memory allocated for the integer
+```
+
+In your original code snippet, when you use `std::make_shared<vehicle>()`, it dynamically allocates memory for a `vehicle` object on the heap, and a `std::shared_ptr<vehicle>` is used to manage the ownership of this dynamically allocated object. This ensures that the memory for the `vehicle` object will be automatically deallocated when the last `std::shared_ptr` pointing to it goes out of scope or is reset.

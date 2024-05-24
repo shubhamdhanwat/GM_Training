@@ -1,0 +1,24 @@
+Vicm : charging controller
+vcu : charging communication controller
+plcm : charging bridge controller
+
+
+4.1.1 Charging Communication Gateway Internal Fault Status
+
+The Chariging Communication Gateway can be in 3 different States
+
+PLC_GWHealth_Unknown:This state indicates that the Charging Communication Gateway is not communicating with the PLC.
+
+PLC_GWHealth_No Fault:This state indicates that the Charging Communication Gateway is communicating with the PLC and there are no faults.
+
+PLC_GWHealth_Faulted:This state indicates that the Charging Communication Gateway is communicating with the PLC but there is a fault.
+
+The diagram also shows the conditions that can cause the Charging Communication Gateway to transition from one state to another.
+
+Condition 1:This condition indicates that the Charging Communication Gateway has received a message from the PLC that indicates that there is a NO fault.
+
+Condition 2:This condition indicates that the Charging Communication Gateway has not received a message from the PLC for a period of time.
+
+Condition 3:This condition indicates that the Charging Communication Gateway has been reset.
+
+For example, if the Charging Communication Gateway is in the PLC_GWHealth_Faulted state, then the conditions that can cause this state can be checked to determine the cause of the fault.

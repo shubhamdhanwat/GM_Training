@@ -1,0 +1,102 @@
+
+git clone https://gitlab.kpit.com/epowertrain/ev_evse_projects/iso15118/iso15118_2_evcc/iso2_gm_v2ggateway.git
+ git branch
+ls
+cd iso2_gm_v2ggateway/
+git branch -- to check the branch in which we are present
+git branch -a 
+git checkout v2g_gateway_iso02   //switch to branch v2g_gateway_iso02
+ls
+git pull
+git log 
+
+-------------------------------------------
+1)Setup environment
+source ~/kivi/scripts/setenvx86_64.sh
+
+
+2)kivicore
+kivi/src kivicore
+mkdir build
+cd build
+source ~/kivi/scripts/setenvx86_64.sh
+cmake -DCMAKE_INSTALL_PREFIX:PATH=$SYSROOT -DCMAKE_BUILD_TYPE=DEBUG ..
+make
+make install
+
+
+- `cmake`: This command is used to invoke CMake, which is a cross-platform build system generator. It reads CMakeLists.txt files present in the current directory and its subdirectories to configure the build process.
+
+- `-DCMAKE_INSTALL_PREFIX:PATH=$SYSROOT`: This option specifies the installation prefix for the project. The `CMAKE_INSTALL_PREFIX` variable determines where the compiled files will be installed when you run `make install`. In your case, the value is set to `$SYSROOT`, which likely refers to a system root directory or a custom installation directory specified in your environment setup. It's common to set this to a directory like `/usr/local` or a custom directory where you want the project to be installed.
+
+- `-DCMAKE_BUILD_TYPE=DEBUG`: This option sets the build type to `DEBUG`. The `CMAKE_BUILD_TYPE` variable controls whether the project is built in debug or release mode. Debug mode typically includes debugging symbols and disables optimizations, making it easier to debug the code. Other possible values for this variable include `RELEASE`, `RELWITHDEBINFO`, and `MINSIZEREL`, each affecting the build process differently.
+
+- `..`: This argument specifies the path to the directory containing the `CMakeLists.txt` file that CMake should use to configure the build. In this case, `..` refers to the parent directory of the current directory, so CMake will look for the `CMakeLists.txt` file in the parent directory.
+
+Overall, this `cmake` command configures the build process for your project with the specified installation prefix, build type, and the location of the `CMakeLists.txt` file. After running this command, you would typically proceed with `make` to build the project.
+-----------------------------------------------------------------------------
+3)flexcharge Service
+ 
+
+kpit@L-10158:~/Desktop/Work$ ls
+cd iso2_gm_v2ggateway
+mkdir build
+cd build
+source ~/kivi/scripts/setenvx86_64.sh
+//sudo apt-get install libjsoncpp-dev
+cmake -DCMAKE_MODULE_PATH=~/kivi/cmake/modules -DCMAKE_INSTALL_PREFIX:PATH=$SYSROOT -DCMAKE_BUILD_TYPE=DEBUG -DWITH_TESTS=ON ..
+make 
+make install
+./com.gm.flexcharge
+
+
+This `cmake` command configures the build process for your project with additional options. Let's break down each option:
+
+- `-DCMAKE_MODULE_PATH=~/kivi/cmake/modules`: This option specifies the path to additional CMake modules. CMake modules are scripts that provide additional functionality to CMake. By setting `CMAKE_MODULE_PATH`, you're telling CMake to search for modules in the specified directory (`~/kivi/cmake/modules`) in addition to its default locations. This is useful if your project requires custom CMake modules for configuration.
+
+- `-DCMAKE_INSTALL_PREFIX:PATH=$SYSROOT`: This option specifies the installation prefix for the project, similar to the previous explanation. The `CMAKE_INSTALL_PREFIX` variable determines where the compiled files will be installed when you run `make install`. Here, `$SYSROOT` likely refers to a system root directory or a custom installation directory specified in your environment setup.
+
+- `-DCMAKE_BUILD_TYPE=DEBUG`: This option sets the build type to `DEBUG`, as explained before. Debug mode typically includes debugging symbols and disables optimizations, making it easier to debug the code.
+
+- `-DWITH_TESTS=ON`: This option enables building of tests for the project. When set to `ON`, the project's tests will be compiled along with the main project code. This is useful for testing the functionality of the project and ensuring its correctness.
+
+- `..`: This argument specifies the path to the directory containing the `CMakeLists.txt` file that CMake should use to configure the build, similar to the previous explanation. In this case, `..` refers to the parent directory of the current directory, so CMake will look for the `CMakeLists.txt` file in the parent directory.
+
+Overall, this `cmake` command configures the build process with additional options, including specifying the path to additional CMake modules, enabling building of tests, and setting the installation prefix and build type. After running this command, you would typically proceed with `make` to build the project.
+------------------------------------------------------------------------------------------------------------------
+Setup environment
+source ~/kivi/scripts/setenvx86_64.sh
+ 
+kivicore
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX:PATH=$SYSROOT -DCMAKE_BUILD_TYPE=DEBUG ..
+make && make install
+ 
+DIN Stack
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX:PATH=$SYSROOT -DX86HOST=1 -DCMAKE_BUILD_TYPE=DEBUG ..
+(cmake -DCMAKE_INSTALL_PREFIX:PATH=$SYSROOT -DX86HOST=1 -DCMAKE_BUILD_TYPE=DEBUG ../Software)
+make && make install
+ 
+ 
+Flexcharge Service
+mkdir build
+cd build
+cmake -DCMAKE_MODULE_PATH=~/kivi/cmake/modules -DCMAKE_INSTALL_PREFIX:PATH=$SYSROOT -DCMAKE_BUILD_TYPE=DEBUG -DWITH_TESTS=ON ..
+make && make install
+ 
+make cover 
+	* build test and generate coverage files
+./flexcharge_tests
+	* Build test 
+	* steps_1: cd $(HOME)/$(WORK)/com.gm.flexcharge/build/tests
+	* steps_2: ./flexcharge_tests
+
+------------------------------------------------------------------------------------------------------
+
+1. Setup Environment:
+   - The command source ~/kivi/scripts/setenvx86_64.sh is used to set up the environment variables required for building the project. 
+   This script likely sets variables like `PATH`, `LD_LIBRARY_PATH`, and others necessary for finding dependencies and configuring the build environment.
+

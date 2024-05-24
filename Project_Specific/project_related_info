@@ -13,7 +13,7 @@ CSM -> Centre stack module
 PLCM -> Pass through modem(a device used for communication between different newtwork protocols or system.)
 VCU -> Vehicle communication unit (V2G)
 CCS -> Charging control stack(CDD -> RTE -> BIONIC(SOCKET API))
-PLC -> Powerline Communication
+PLCM -> charing bridge controller
 
 
 Charging Controller: This ECU (Electronic Control Unit) manages the core charging functionality.
@@ -103,6 +103,16 @@ VCU/CSM -> Vehicle communication unit/ Centre stack module
 Important section in requirements
 -------------------------------------------------
 4.1.1: Charging Communication Gateway Internal Fault Status
+Condition  1 : THe Plc_GWHealth_No Fault
+powerline communication Gateway health no Fault
+->all charging controllers comm fault active status -> false
+
+condition 2 : PLC_GWHealth_Unknown
+-> charging communication gateway operaion status->unknown/ Inactive
+
+Condition 3 : PLC_GWHealt_Faulted.
+-> fault active status -> True.    
+
 4.1.2: Charging Communication Operational Status
 4.2.2.3: Functional Signal Status Flag Processing
 4.2.2.4: Signal Supervision Handling
